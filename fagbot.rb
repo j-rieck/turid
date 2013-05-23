@@ -19,10 +19,10 @@ end
 
 bot = Cinch::Bot.new do
   configure do |c|
-  	c.nick = "faggoz"
+  	c.nick = "faggot"
   	c.realname = "rainbowz"
   	c.server = "efnet.xs4all.nl"
-  	c.channels = ["#fag4lyfe"]#, "#mac1"]
+  	c.channels = ["#fag4lyfe", "#mac1"]
   	c.plugins.plugins = [Cinch::Plugins::Spotify, Cinch::Plugins::DownForEveryone, Cinch::Plugins::LastSeen, Cinch::Plugins::Hello, TheTime, Cinch::Plugins::URLMagic, Cinch::Plugins::Gee, Cinch::Plugins::PluginManagement]
   	c.plugins.prefix = /^\./
   end
