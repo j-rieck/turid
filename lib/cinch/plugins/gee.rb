@@ -1,9 +1,8 @@
 require 'cinch'
 require 'nokogiri'
 require 'bitly'
-# require 'open-uri'
-# require 'mechanize'
-require 'google-search'
+require 'open-uri'
+require 'mechanize'
 
 module Cinch
 	module Plugins
@@ -13,10 +12,6 @@ module Cinch
 			match /g (.+)/
 
 			def execute(m, q)
-				search = Google::Search::Web.new
-				search.query = q
-
-				# q = m.message.gsub(/^!g /, '')
 				q = URI::encode(q)
 				n = Nokogiri::HTML(open('http://google.com/search?q='+q,
 																'User-Agent' => 'Chrome/26.0.1410.65 Safari/537.31'))
@@ -30,7 +25,7 @@ module Cinch
 				bitly = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
 				short = bitly.shorten(p.uri.to_s)
 
-				m.reply "\"#{title}\" " + short.short_url
+				m.reply %-"#{title}" #{short.short_url}-
 			end
 		end
 	end
