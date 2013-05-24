@@ -16,8 +16,8 @@ module Cinch
 				debug q.to_s
 				# q = m.message.gsub(/^!g /, '')
 				q = URI::encode(q)
-				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=queef', 'User-Agent' => 'queef'))
-				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=queef'
+				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=fagbot', 'User-Agent' => 'fagbot'))
+				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=fagbot'
 
 				mz = Mechanize.new
 				mz.user_agent_alias = 'Mac Safari'
