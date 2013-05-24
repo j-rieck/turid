@@ -26,7 +26,7 @@ module Cinch
 					shortURL = "(" + shortURL.short_url + ")"
 				end
 				
-				m.reply %-"#{title}" #{short_url}-
+				m.reply %-"#{title}" #{shortURL}-
 			end
 		end
 	end
