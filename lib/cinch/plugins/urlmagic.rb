@@ -4,7 +4,7 @@ require 'bitly'
 
 module Cinch
 	module Plugins
-		class URLMagic
+		class Urlmagic
 			include Cinch::Plugin
 
 			match /(https?:\/\/[^\s]+)/, use_prefix: false
