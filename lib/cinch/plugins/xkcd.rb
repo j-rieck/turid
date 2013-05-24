@@ -9,6 +9,8 @@ module Cinch
 			match /xkcd\s?(\d+)?/
 
 			def execute(m, id)
+				strip = ""
+
 				unless id.nil?
 					strip = id
 				end
