@@ -17,9 +17,12 @@ module Cinch
 				# q = m.message.gsub(/^!g /, '')
 				q = URI::encode(q)
 				debug q
-				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=fagbot', 'User-Agent' => 'fagbot'))
+				n = Nokogiri::HTML(open('http://google.com/search?q='+q,
+																'User-Agent' => 'queef',
+																'From' => 'faggot@wonderland.wo',
+																'Referer' => 'http://faggotville.wo'))
 				debug n
-				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=fagbot'
+				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=queef'
 				debug uri
 
 				mz = Mechanize.new
