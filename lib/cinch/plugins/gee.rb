@@ -16,13 +16,18 @@ module Cinch
 				debug q.to_s
 				# q = m.message.gsub(/^!g /, '')
 				q = URI::encode(q)
+				debug q
 				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=fagbot', 'User-Agent' => 'fagbot'))
+				debug n
 				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=fagbot'
+				debug uri
 
 				mz = Mechanize.new
 				mz.user_agent_alias = 'Mac Safari'
 				p = mz.get(uri)
+				debug p
 				title = p.title.gsub(/[\r\n\t]/, '')
+				debug title
 				bitly = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
 				short = bitly.shorten(p.uri.to_s)
 
