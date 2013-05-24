@@ -1,4 +1,4 @@
-stat# Fagbot - the fag bot
+# Fagbot - the fag bot
 
 The guy in control at #mac1 @ EFnet
 
