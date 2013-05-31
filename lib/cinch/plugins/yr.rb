@@ -38,7 +38,7 @@ module Cinch
 					end
 				end
 
-				return "Fant desverre ikke stedet du søkte etter. Prøv et annet"
+				return nil
 			end
 
 			def forecast (uri)
