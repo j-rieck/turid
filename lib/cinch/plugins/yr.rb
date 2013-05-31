@@ -30,10 +30,10 @@ module Cinch
 				end
 
 				# Filtering out unmatched place
-				@@places.delete_if {|knr, name| not name.match(/\b#{loc}\b/i)}
+				@@places.delete_if {|knr, name| not name.match(/#{loc}/i)}
 
 				@@places.each do |place|
-					if place[1].match(/\b#{loc}\b/i)
+					if place[1].match(/#{loc}/i)
 						return place[12]
 					end
 				end
