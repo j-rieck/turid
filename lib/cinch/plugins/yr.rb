@@ -20,7 +20,7 @@ module Cinch
 				@@places.each do |place|
 					# reg2 filter
 					unless reg2.nil?
-						unless place[7].downcase.match(/\b#{reg2.downcase}\b/)
+						unless place[7].downcase.match(/\b#{reg2.downcase}\b/u)
 							debug "reg2 present and not match fylke"
 							next
 						end
@@ -28,16 +28,16 @@ module Cinch
 
 					# reg1 filter
 					unless reg1.nil?
-						unless place[6].downcase.match(/\b#{reg1.downcase}\b/)
+						unless place[6].downcase.match(/\b#{reg1.downcase}\b/u)
 							debug "reg1 present and not match kommune"
-							unless place[7].downcase.match(/\b#{reg1.downcase}\b/)
+							unless place[7].downcase.match(/\b#{reg1.downcase}\b/u)
 								debug "reg1 present and not match fylke"
 								next
 							end
 						end
 					end
 
-					if place[1].downcase.match(/\b#{loc.downcase}\b/)
+					if place[1].downcase.match(/\b#{loc.downcase}\b/u)
 						return place[13]
 					end
 				end
