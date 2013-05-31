@@ -1,6 +1,7 @@
 # encoding=utf-8
 require 'nokogiri'
 require 'open-uri'
+require 'uri'
 
 module Cinch
 	module Plugins
@@ -42,7 +43,7 @@ module Cinch
 
 			def forecast (uri)
 				begin
-			      doc = Nokogiri::XML(open(uri))
+			      doc = Nokogiri::XML(open(URI.encode(uri)))
 			      name = doc.css('location name').text
 			      temp = doc.css('observations weatherstation:first temperature').attr('value')
 			      windDir = doc.css('observations weatherstation:first windDirection').attr('name')
