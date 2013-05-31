@@ -10,7 +10,7 @@ module Cinch
 			match /yr\s?(\p{Word}+)?\s?(\p{Word}+)?\s?(\p{Word}+)?/
 
 			def get_places
-				File.readlines(Dir.pwd + '/lib/data/noreg.csv').map do |line|
+				File.readlines(Dir.pwd + '/lib/data/noreg.csv', :encoding =>'UTF-8').map do |line|
 				  @@places.push(line.split(/\t/))
 				end
 			end
@@ -20,7 +20,7 @@ module Cinch
 				@@places.each do |place|
 					# reg2 filter
 					unless reg2.nil?
-						unless place[7].downcase.match(/\b#{reg2.downcase}\b/u)
+						unless place[7].downcase.match(/\b#{reg2.downcase}\b/)
 							debug "reg2 present and not match fylke"
 							next
 						end
@@ -28,9 +28,9 @@ module Cinch
 
 					# reg1 filter
 					unless reg1.nil?
-						unless place[6].downcase.match(/\b#{reg1.downcase}\b/u)
+						unless place[6].downcase.match(/\b#{reg1.downcase}\b/)
 							debug "reg1 present and not match kommune"
-							unless place[7].downcase.match(/\b#{reg1.downcase}\b/u)
+							unless place[7].downcase.match(/\b#{reg1.downcase}\b/)
 								debug "reg1 present and not match fylke"
 								next
 							end
