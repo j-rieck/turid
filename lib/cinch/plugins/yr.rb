@@ -46,14 +46,16 @@ module Cinch
 			      doc = Nokogiri::XML(open(URI.encode(uri)))
 			      name = doc.css('location name').text
 			      
-			      t = doc.css('observations weatherstation:first temperature').attr('value')
-			      temp = "#{t.attr('value')}°C "
+			      t = doc.css('observations weatherstation:first temperature')
+			      temp = "#{t.attr('value')}°C"
 
 			      wd = doc.css('observations weatherstation:first windDirection')
 			      ws = doc.css('observations weatherstation:first windSpeed')
 			      wind = ""
-			      unless wd.nil? and ws.nil?
-			      	wind = "Vind #{ws.attr('name')} m/s #{wd.attr('mps')}." 
+			      begin
+			      	wind = ". Vind #{ws.attr('mps')} m/s #{wd.attr('name')}." 
+			      rescue
+			      	debug "Fucking wind"
 			      end
 
 			      return "#{name}: For øyeblikket #{temp} #{wind}"
