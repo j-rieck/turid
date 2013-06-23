@@ -42,22 +42,12 @@ module Cinch
 			end
 
 			def forecast (uri)
-				@name 			= ""
-				@temperature 	= ""
-				@windDirection 	= ""
-				@windSpeed 		= ""
-
-				@windDataString	= ""
-
 				begin
 					doc = Nokogiri::XML(open(URI.encode(uri)))
-				rescue OpenURI::HTTPError
-					return "Får ikke kontakt med yr.no :/"
-				end
-
-				begin
 					name 			= doc.css('location name').text
 					temperature 	= doc.css('observations weatherstation:first temperature').attr('value')
+				rescue OpenURI::HTTPError
+					return "Får ikke kontakt med yr.no :/"
 				rescue NoMethodError
 					return "No data found - shit isn't working - blahblabhblah"
 				end
