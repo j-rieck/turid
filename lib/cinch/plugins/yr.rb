@@ -45,11 +45,18 @@ module Cinch
 				begin
 			      doc = Nokogiri::XML(open(URI.encode(uri)))
 			      name = doc.css('location name').text
-			      temp = doc.css('observations weatherstation:first temperature').attr('value')
-			      windDir = doc.css('observations weatherstation:first windDirection').attr('name')
-			      windSpd = doc.css('observations weatherstation:first windSpeed').attr('mps')
+			      
+			      t = doc.css('observations weatherstation:first temperature').attr('value')
+			      temp = "#{t.attr('value')}°C "
 
-			      return "#{name}: For øyeblikket #{temp}°C; Vind #{windSpd} m/s #{windDir}."
+			      wd = doc.css('observations weatherstation:first windDirection')
+			      ws = doc.css('observations weatherstation:first windSpeed')
+			      wind = ""
+			      unless wd.nil? and ws.nil?
+			      	wind = "Vind #{ws.attr('name')} m/s #{wd.attr('mps')}." 
+			      end
+
+			      return "#{name}: For øyeblikket #{temp} #{wind}"
 			    rescue OpenURI::HTTPError
 			      m.reply "Får ikke kontakt med yr.no :/"
 			      return
