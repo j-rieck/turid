@@ -23,7 +23,7 @@ module Cinch
 				bitly = Bitly.new('o_7ao1emfe9u', 'R_b29e38be56eb1f04b9d8d491a4f5b344')
 				shortURL = bitly.shorten(url)
 				
-				m.reply '"#{title}" (#{shortURL.short_url})'
+				m.reply %-"#{title}" (#{shortURL.short_url})-
 			end
 		end
 	end

@@ -12,12 +12,9 @@ module Cinch
 			match /g (.+)/
 
 			def execute(m, q)
-				debug "Googleinginging"
-				debug q.to_s
-				# q = m.message.gsub(/^!g /, '')
 				q = URI::encode(q)
-				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=queef', 'User-Agent' => 'queef'))
-				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=queef'
+				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=safari', 'User-Agent' => 'safari'))
+				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=safari'
 
 				mz = Mechanize.new
 				mz.user_agent_alias = 'Mac Safari'
