@@ -42,6 +42,13 @@ module Cinch
 			end
 
 			def forecast (uri)
+				@name 			= ""
+				@temperature 	= ""
+				@windDirection 	= ""
+				@windSpeed 		= ""
+
+				@windDataString	= ""
+
 				begin
 					doc = Nokogiri::XML(open(URI.encode(uri)))
 				rescue OpenURI::HTTPError
@@ -49,14 +56,24 @@ module Cinch
 				end
 
 				begin
-					name = doc.css('location name').text
-					temp = doc.css('observations weatherstation:first temperature').attr('value')
-					windDir = doc.css('observations weatherstation:first windDirection').attr('name')
-					windSpd = doc.css('observations weatherstation:first windSpeed').attr('mps')
-
-					return "#{name}: For øyeblikket #{temp}°C; Vind #{windSpd} m/s #{windDir}."
+					name 			= doc.css('location name').text
+					temperature 	= doc.css('observations weatherstation:first temperature').attr('value')
 				rescue NoMethodError
-					return "#{name}: For øyeblikket #{temp}°C"
+					return "No data found - shit isn't working - blahblabhblah"
+				end
+
+				begin
+					windDirection 	= doc.css('observations weatherstation:first windDirection').attr('name')
+					windSpeed 		= doc.css('observations weatherstation:first windSpeed').attr('mps')
+					windDataString 	= "Vind #{windSpeed} m/s #{windDirection}."
+				rescue NoMethodError
+					debug "No wind data gotten, fucker!"
+				end
+
+				if windDataString.nil?
+					return "#{name}: For øyeblikket #{temperature}°C"
+				else
+					return "#{name}: For øyeblikket #{temperature}°C. #{windDataString}"
 				end
 			end
 
