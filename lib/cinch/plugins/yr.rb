@@ -45,8 +45,7 @@ module Cinch
 				begin
 			      doc = Nokogiri::XML(open(URI.encode(uri)))
 			    rescue OpenURI::HTTPError
-			      m.reply "Får ikke kontakt med yr.no :/"
-			      return
+			      return "Får ikke kontakt med yr.no :/"
 			    end
 
 				begin
@@ -55,12 +54,11 @@ module Cinch
 					windDir = doc.css('observations weatherstation:first windDirection').attr('name')
 windSpd = doc.css('observations weatherstation:first windSpeed').attr('mps')
 
-					m.reply "#{name}: For øyeblikket #{temp}°C; Vind #{windSpd} m/s #{windDir}."
+					return "#{name}: For øyeblikket #{temp}°C; Vind #{windSpd} m/s #{windDir}."
 				rescue NoMethodError
-					m.reply "#{name}: For øyeblikket #{temp}°C"
+					return "#{name}: For øyeblikket #{temp}°C"
 				end
 
-				return
 			end
 
 			def execute(m, loc, reg1, reg2)
