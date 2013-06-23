@@ -43,7 +43,7 @@ module Cinch
 
             def forecast (uri)
                 begin
-                    doc = Nokogiri::XML(open(URI.encode(uri)))
+                    doc             = Nokogiri::XML(open(URI.encode(uri)))
                     name            = doc.css('location name').text
                     temperature     = doc.css('observations weatherstation:first temperature').attr('value')
                 rescue OpenURI::HTTPError
