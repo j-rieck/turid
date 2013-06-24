@@ -13,9 +13,8 @@ module Cinch
 
 			def execute(m, q)
 				q = URI::encode(q)
-				n = Nokogiri::HTML(open('http://google.com/search?q='+q,
-																'User-Agent' => 'Chrome/26.0.1410.65 Safari/537.31'))
-				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=queef'
+				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=safari', 'User-Agent' => 'safari'))
+				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=safari'
 
 				mz = Mechanize.new
 				mz.user_agent_alias = 'Mac Safari'
