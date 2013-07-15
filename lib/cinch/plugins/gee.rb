@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'bitly'
 require 'open-uri'
 require 'mechanize'
+require 'cgi'
 
 module Cinch
 	module Plugins
@@ -11,20 +12,24 @@ module Cinch
 
 			match /g (.+)/
 
+      def get_url_info (q)
+        url = "http://google.com/search?q=#{CGI.escape(q)}&sourceid=chrome&ie=UTF-8"
+        res = Nokogiri::HTML(open(url)).at("h3.r")
+
+        return res;
+      end
+
 			def execute(m, q)
-				q = URI::encode(q)
-				n = Nokogiri::HTML(open('http://google.com/search?q='+q+'&client=safari', 'User-Agent' => 'safari'))
-				uri = "http://google.com" + n.css('h3.r a')[0]['href']+'&client=safari'
+        response  = get_url_info q
 
-				mz = Mechanize.new
-				mz.user_agent_alias = 'Mac Safari'
-				p = mz.get(uri)
-				title = p.title.gsub(/[\r\n\t]/, '')
-				debug title
-				bitly = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
-				short = bitly.shorten(p.uri.to_s)
+        title     = response.text
+        link      = response.at('a')[:href][7..-1]
+        url       = link.scan(/\/\/(.+)\//).first
 
-				m.reply %-"#{title}" #{short.short_url}-
+				bitly     = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
+        short     = bitly.shorten(link)
+
+				m.reply %-«#{title}» \- #{short.short_url} (#{url.first})-
 			end
 		end
 	end
