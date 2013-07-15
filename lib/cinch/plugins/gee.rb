@@ -14,8 +14,8 @@ module Cinch
 			match /g (.+)/
 
       def get_url_info (q)
-        url = "http://google.com/search?q=#{CGI.escape(q)}&sourceid=chrome&ie=UTF-8"
-        res = Nokogiri::HTML(open(url)).at("h3.r")
+        url       = "http://google.com/search?q=#{CGI.escape(q)}&sourceid=chrome&ie=UTF-8"
+        res       = Nokogiri::HTML(open(url)).at("h3.r")
 
         return res;
       end
@@ -38,21 +38,19 @@ module Cinch
           url = url.last
         end
 
-        # debug url.first
-
 				bitly     = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
+
         begin
-          short     = bitly.shorten(link)
+          short   = bitly.shorten(link).short_url
         rescue
           begin
-            short     = bitly.shorten("http://"+link)
+            short = bitly.shorten("http://"+link).short_url
           rescue
-            short = "asdf"
+            short = url
           end
         end
 
-
-				m.reply %-«#{title}» \- #{short.short_url} (#{url})-
+				m.reply %-«#{title}» \- #{short} (#{url})-
 			end
 		end
 	end
