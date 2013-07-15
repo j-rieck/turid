@@ -4,6 +4,7 @@ require 'bitly'
 require 'open-uri'
 require 'mechanize'
 require 'cgi'
+require 'iconv'
 
 module Cinch
 	module Plugins
@@ -20,9 +21,11 @@ module Cinch
       end
 
 			def execute(m, q)
+        ic        = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+
         response  = get_url_info q
 
-        title     = response.text
+        title     = ic.iconv(response.text)
         link      = response.at('a')[:href][7..-1]
         url       = link.scan(/(http:\/\/)?(www)?(.+)\//).last
 
