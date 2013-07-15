@@ -24,12 +24,32 @@ module Cinch
 
         title     = response.text
         link      = response.at('a')[:href][7..-1]
-        url       = link.scan(/\/\/(.+)\//).first
+        url       = link.scan(/(http:\/\/)?(www)?(.+)\//).last
+
+        debug title
+        debug link
+
+        if url.nil?
+          url = ""
+        else
+          url = url.last
+        end
+
+        # debug url.first
 
 				bitly     = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
-        short     = bitly.shorten(link)
+        begin
+          short     = bitly.shorten(link)
+        rescue
+          begin
+            short     = bitly.shorten("http://"+link)
+          rescue
+            short = "asdf"
+          end
+        end
 
-				m.reply %-«#{title}» \- #{short.short_url} (#{url.first})-
+
+				m.reply %-«#{title}» \- #{short.short_url} (#{url})-
 			end
 		end
 	end
