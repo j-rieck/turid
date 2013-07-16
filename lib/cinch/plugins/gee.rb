@@ -27,16 +27,12 @@ module Cinch
 
         title     = ic.iconv(response.text)
         link      = response.at('a')[:href][7..-1]
-        url       = link.scan(/(http:\/\/)?(www)?(.+)\//).last
+        url       = link.scan(/(https?:\/\/)?(www)?(.+)\//).last
 
         debug title
         debug link
 
-        if url.nil?
-          url = ""
-        else
-          url = url.last
-        end
+        url = url.nil? ? "" : url.last
 
 				bitly     = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
 
