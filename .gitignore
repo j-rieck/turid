@@ -17,3 +17,6 @@ target/
 
 # Other
 out/
+
+# Ruby
+Gemfile.lock
