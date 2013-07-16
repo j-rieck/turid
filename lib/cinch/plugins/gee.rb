@@ -27,7 +27,7 @@ module Cinch
 
         title     = ic.iconv(response.text)
         link      = response.at('a')[:href][7..-1]
-        url       = link.scan(/(https?:\/\/)?(www)?(.+)\//).last
+        url       = link.scan(/(https?:\/\/)?(www.)?(.+)\//).last
 
         debug title
         debug link
