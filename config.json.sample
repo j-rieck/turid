@@ -1,0 +1,20 @@
+{
+    "server":"efnet.xs4all.nl",
+    "port":"6667",
+    "nick":"faggot",
+    "name":"a fag",
+    "user":"faggy",
+    "admins":[
+        {
+            "nick":"tmn",
+            "host":"trimini.no"
+        },
+        {
+            "nick":"jmaister",
+            "host":"p0p.it"
+        }
+    ],
+    "channels":[
+        "#fag4lyfe"
+    ]
+}
