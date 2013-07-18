@@ -41,7 +41,7 @@ module Cinch
           end
         end
 
-        m.reply %-«#{title}» \- #{short} (#{url})-
+        m.reply %?"#{title}" - #{short} (#{url})?
       end
     end
   end
