@@ -21,16 +21,11 @@ module Cinch
       end
 
       def execute(m, q)
-        ic        = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-
         response  = get_url_info q
 
-        title     = ic.iconv(response.text)
+        title     = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(response.text)
         link      = response.at('a')[:href][7..-1]
         url       = link.scan(/(https?:\/\/)?(www.)?(.+)\//).last
-
-        debug title
-        debug link
 
         url = url.nil? ? "" : url.last
 
