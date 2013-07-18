@@ -3,10 +3,15 @@ require "json"
 class Settings
 
   def initialize(file)
-    @json = "asdf"
-    File.open(file, "r") do |f|
-      @json = JSON.load(f)
+    @json = nil
+    begin
+      File.open(file, "r") do |f|
+        @json = JSON.load(f)
+      end
+    rescue
+      abort "\nconfig.json is missing"
     end
+
 
     objectify
   end
