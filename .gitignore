@@ -17,6 +17,7 @@ target/
 
 # Other
 out/
+config.json
 
 # Ruby
 Gemfile.lock
