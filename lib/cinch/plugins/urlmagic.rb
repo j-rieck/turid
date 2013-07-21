@@ -16,7 +16,12 @@ module Cinch
 
 				agent = Mechanize.new
 				page = agent.get(url)
-				title = page.title.gsub(/[\r\n\t]/, '')
+				begin
+					title = page.title.gsub(/[\r\n\t]/, '')
+				rescue
+					title nil
+					debug "could not get title"
+				end
 				shortURL = ""
 
 				if url.length > 80
@@ -26,7 +31,9 @@ module Cinch
 					shortURL = "(" + shortURL.short_url + ")"
 				end
 				
-				m.reply %-"#{title}" #{shortURL}-
+				unless title.nil?
+					m.reply %-"#{title}" #{shortURL}-
+				end
 			end
 		end
 	end
