@@ -13,12 +13,26 @@ module Cinch
       match /op (\S+) (\S+)/, method: :op
       match /deop (\S+) (\S+)/, method: :deop
       match /kick (\S+) (.*) (\S+)/, method: :kick
+      match /conf reload/, method: :conf_reload
 
       def faggot(m, me)
+        m.reply "thoijasdf"
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         m.reply %-jmiaster er sexy \- #{me}-
       end
 
+      match /join\s+(#[#\w\d_-]+)/, method: :join
+      def join(m, channel)
+        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        bot.join channel
+      end
+
+      match /part\s+(#[#\w\d_-]+)/, method: :part
+      def part(m, channel)
+        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        bot.part channel
+      end
+      
       def say(m, channel, message)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         Channel("##{channel}").privmsg(message)
@@ -38,6 +52,11 @@ module Cinch
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         reason = reason || "Fuck off!"
         Channel("##{channel}").kick(user)
+      end
+
+      def conf_reload (m)
+        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        $conf = Settings.new("config.json")
       end
 
     end

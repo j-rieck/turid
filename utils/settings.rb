@@ -12,7 +12,6 @@ class Settings
       abort "\nconfig.json is missing"
     end
 
-
     objectify
   end
 
