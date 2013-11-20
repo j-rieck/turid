@@ -82,7 +82,7 @@ module Cinch
 					return
 				end
 
-				m.reply "Fant desverre ikke stedet du søkte etter. Prøv et annet"
+				m.reply "Fant desverre ikke stedet du søkte etter. Prøv et annet. (Søker kun i Norge.)"
 			end
 		end
 	end
