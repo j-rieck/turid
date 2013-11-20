@@ -4,7 +4,7 @@ require 'bitly'
 require 'open-uri'
 require 'mechanize'
 require 'cgi'
-require 'iconv'
+# require 'iconv'
 
 module Cinch
   module Plugins
@@ -15,7 +15,7 @@ module Cinch
 
       def get_url_info (q)
         url       = "http://google.com/search?q=#{CGI.escape(q)}&sourceid=chrome&ie=UTF-8"
-        res       = Nokogiri::HTML(open(url)).at("h3.r")
+        res       = Nokogiri::HTML(open(url)).at("h3.r a")
 
         return res;
       end
@@ -23,25 +23,26 @@ module Cinch
       def execute(m, q)
         response  = get_url_info q
 
-        title     = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(response.text)
-        link      = response.at('a')[:href][7..-1]
-        url       = link.scan(/(https?:\/\/)?(www.)?(.+)\//).last
+        title = ""
+        response.children.each do |c|
+          title = title + c.text
+        end
 
-        url = url.nil? ? "" : url.last
-
+        url      = /q=([^&]+)/.match(response.attributes['href'].value)[1]
+        domain   = /(https?:\/\/)?(www.)?([^\/]+)/.match(url)[3]
         bitly     = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
 
         begin
-          short   = bitly.shorten(link).short_url
+          short   = bitly.shorten(url).short_url
         rescue
           begin
-            short = bitly.shorten("http://"+link).short_url
+            short = bitly.shorten(url).short_url
           rescue
             short = url
           end
         end
 
-        m.reply %?"#{title}" - #{short} (#{url})?
+        m.reply %?"#{title}" - #{short} (#{domain})?
       end
     end
   end
