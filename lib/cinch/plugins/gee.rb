@@ -29,7 +29,7 @@ module Cinch
         end
 
         url      = /q=([^&]+)/.match(response.attributes['href'].value)[1]
-        domain   = /(https?:\/\/)?(www.)?([^\/]+)/.match(url)[3]
+        domain   = /(https?:\/\/)?(www.)?([^\/]+)/.match(url)[-1]
         bitly     = Bitly.new("o_7ao1emfe9u", "R_b29e38be56eb1f04b9d8d491a4f5b344")
 
         begin
