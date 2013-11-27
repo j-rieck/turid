@@ -24,7 +24,7 @@ module Cinch
 		      return
 		    end
 		    title = page.title.gsub(/[\r\n]/, '')
-		    m.reply %-"#{title}" #{uri}"-
+		    m.reply %-"#{title}" #{uri}-
 			end
 		end
 	end
