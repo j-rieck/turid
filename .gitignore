@@ -21,3 +21,4 @@ config.json
 
 # Ruby
 Gemfile.lock
+.bundle
