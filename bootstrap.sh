@@ -10,4 +10,6 @@ sudo apt-get install -y libcurl3-dev
 
 ## 
 cd /vagrant/
+
+source ~/.bashrc
 bundle install --path ~/.gem
