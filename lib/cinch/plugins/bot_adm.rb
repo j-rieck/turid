@@ -12,7 +12,7 @@ module Cinch
       match /say (\S+) (.*)/, method: :say
       match /op (\S+) (\S+)/, method: :op
       match /deop (\S+) (\S+)/, method: :deop
-      match /kick (\S+) (\S+) (.*)/, method: :kick
+      match /kick (\S+) (\S+)(.*)?/, method: :kick
       match /conf reload/, method: :conf_reload
 
       def faggot(m, me)
@@ -49,9 +49,12 @@ module Cinch
       end
 
       def kick(m, channel, user, reason)
+        debug channel
+        debug user
+        debug reason
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
-        reason = reason || "Fuck off!"
-        Channel("##{channel}").kick(user)
+        reason ||= "Fuck off!"
+        Channel("##{channel}").kick(user, reason)
       end
 
       def conf_reload (m)
