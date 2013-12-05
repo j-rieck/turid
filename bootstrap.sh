@@ -6,7 +6,7 @@ sudo apt-get install -y curl
 
 \curl -sSL https://get.rvm.io | bash -s stable --ruby
 
-sudo apt-get install libcurl3-dev
+sudo apt-get install -y libcurl3-dev
 
 ## 
 cd /vagrant/

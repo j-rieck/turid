@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, :path => "bootstrap.sh"
 
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  # config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
