@@ -10,10 +10,6 @@ class ESLogger
     @type = "item"
   end
 
-  def test
-    "testing OK"
-  end
-
   def save_message(time, name, msg)
     @client.index index: @index, type: @type, body: { time: time, name: name, message: msg }
     @client.indices.refresh index: @index

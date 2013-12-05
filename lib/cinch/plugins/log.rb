@@ -22,12 +22,6 @@ module Cinch
         @last_time_check  = Time.now
 
         @logger = ESLogger.new
-
-      end
-
-      match /logger test/, method: :test
-      def test (m)
-        m.reply @logger.test
       end
 
       def cleanup(*)
@@ -51,7 +45,6 @@ module Cinch
                             :nick => msg.user.name,
                             :msg  => msg.message)
         )
-
       end
 
       match /logger search (.+)/, method: :search
