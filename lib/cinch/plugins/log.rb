@@ -21,9 +21,13 @@ module Cinch
         @midnight_message = config[:midnight_message] || "=== The dawn of a new day: %Y-%m-%d ==="
         @last_time_check  = Time.now
 
-        logger = ESLogger.new
+        @logger = ESLogger.new
 
-        bot.debug("lol")
+      end
+
+      match /logger test/, method: :test
+      def test (m)
+        m.reply @logger.test
       end
 
       def cleanup(*)
@@ -39,6 +43,8 @@ module Cinch
 
       def log_public_message(msg)
         time = Time.now.strftime(@timeformat)
+        @logger.save_message(time, msg.user.name, msg.message)
+
         bot.debug (sprintf(
                             @logformat,
                             :time => time,
@@ -48,6 +54,10 @@ module Cinch
 
       end
 
+      match /logger search (.+)/, method: :search
+      def search (m, q)
+        m.reply @logger.search(q)
+      end
     end
   end
 end
