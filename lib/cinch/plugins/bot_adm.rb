@@ -12,7 +12,7 @@ module Cinch
       match /say (\S+) (.*)/, method: :say
       match /op (\S+) (\S+)/, method: :op
       match /deop (\S+) (\S+)/, method: :deop
-      match /kick (\S+) (.*) (\S+)/, method: :kick
+      match /kick (\S+) (\S+) (.*)/, method: :kick
       match /conf reload/, method: :conf_reload
 
       def faggot(m, me)
