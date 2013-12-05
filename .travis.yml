@@ -1,0 +1,4 @@
+notifications:
+  email: false
+  irc:
+    - "irc.efnet.org#fag4lyfe"
