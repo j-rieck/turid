@@ -22,3 +22,6 @@ config.json
 # Ruby
 Gemfile.lock
 .bundle
+
+# Vagrant
+.vagrant
