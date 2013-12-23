@@ -32,7 +32,15 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::BotAdm
     ]
 
-    c.plugins.prefix    = /^\./
+    c.plugins.options = {}
+
+    Dir["./lib/data/*.settings.rb"].each { 
+      |file| eval( File.open(file, "rb").read ).each do |key, val|
+        c.plugins.options[key] = val
+      end
+    }
+
+    c.plugins.prefix = /^\./
   end
 end
 

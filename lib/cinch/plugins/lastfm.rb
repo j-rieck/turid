@@ -15,33 +15,13 @@ module Cinch
 
       @@host      = 'ws.audioscrobbler.com'
       @@port      = '80'
-      @@conf_file = Dir.pwd + '/lib/data/conf_lastfm.json'
-      
-      @@conf      = nil
-      
-      @@api_key   = nil
 
       def initialize(*args)
         super
-
-        if (File.exist?(@@conf_file))
-
-          begin
-            File.open(@@conf_file, "r") do |f|
-              @@conf = JSON.load(f)
-              @@api_key = @@conf['api_key']
-            end
-          rescue
-            debug "\n\nUnable to read file\n\n"
-          end
-
-        else
-          debug "\n\nconf_lastfm.json is missing\n\n"
-        end
       end
 
       def handle_recent_tracks (username)
-        post_ws          = "/2.0/?method=user.getrecenttracks&user=#{username}&api_key=#{@@api_key}&format=json"
+        post_ws          = "/2.0/?method=user.getrecenttracks&user=#{username}&api_key=#{config[:api_key]}&format=json"
         request          = JSON.parse( post(post_ws).body )
 
         if (request['recenttracks'].nil?)
@@ -65,7 +45,7 @@ module Cinch
 
       match /np\s?(.+)?/
       def execute(m, user)
-        if (@@api_key.nil?)
+        if (config[:api_key].nil?)
           debug "No API key specified for plugin. Check conf_last.fm in data folder."
           return
         end
