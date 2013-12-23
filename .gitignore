@@ -18,7 +18,7 @@ target/
 # Fagbot / Other
 out/
 config.json
-conf_lastfm.json
+*.settings.rb
 
 # Ruby
 Gemfile.lock
