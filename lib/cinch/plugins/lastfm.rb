@@ -66,7 +66,7 @@ module Cinch
       match /np\s?(.+)?/
       def execute(m, user)
         if (@@api_key.nil?)
-          puts "No API key specified for plugin. Check conf_last.fm in data folder."
+          debug "No API key specified for plugin. Check conf_last.fm in data folder."
           return
         end
         user ||= m.user.name
