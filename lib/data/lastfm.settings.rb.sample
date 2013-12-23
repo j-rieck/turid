@@ -1,0 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
+Cinch::Plugins::Lastfm => {
+  :api_key => '...'
+}
