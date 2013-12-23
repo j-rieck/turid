@@ -38,6 +38,7 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Xkcd,
         Cinch::Plugins::Ask,
         Cinch::Plugins::Yr,
+        Cinch::Plugins::Lastfm,
         Cinch::Plugins::BotAdm
     ]
 
