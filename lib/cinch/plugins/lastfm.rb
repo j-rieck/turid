@@ -54,7 +54,7 @@ module Cinch
         album            = request['recenttracks']['track'][0]['album'].nil? ? '' : " - Album: " + request['recenttracks']['track'][0]['album']['#text']
         last_played_time = request['recenttracks']['track'][0]['date'].nil? ? '' : " - Last played: " + request['recenttracks']['track'][0]['date']['#text']
 
-        return "#{artist} - #{song} - Album: #{album}#{last_played_time}"
+        return "#{artist} - #{song}#{album}#{last_played_time}"
       end
 
       def post (post_ws)
