@@ -13,11 +13,16 @@ module Cinch
     class Lastfm
       include Cinch::Plugin
 
-      @@host      = 'ws.audioscrobbler.com'
-      @@port      = '80'
+      @@settings_file = Dir.pwd + '/lib/data/lastfm.settings.rb'
+      @@host          = 'ws.audioscrobbler.com'
+      @@port          = '80'
 
       def initialize(*args)
         super
+
+        bot.configure do |c|
+          c.plugins.options[Cinch::Plugins::Lastfm] = eval( File.open(@@settings_file, "rb").read )
+        end
       end
 
       def handle_recent_tracks (username)
@@ -41,7 +46,6 @@ module Cinch
         req      = Net::HTTP::Post.new(post_ws, initheader = {'Content-Type' => 'application/json'})
         response = Net::HTTP.new(@@host, @@port).start {|http| http.request(req)}
       end
-
 
       match /np\s?(.+)?/
       def execute(m, user)
