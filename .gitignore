@@ -15,9 +15,10 @@
 log/
 target/
 
-# Other
+# Fagbot / Other
 out/
 config.json
+conf_lastfm.json
 
 # Ruby
 Gemfile.lock
@@ -25,3 +26,4 @@ Gemfile.lock
 
 # Vagrant
 .vagrant
+
