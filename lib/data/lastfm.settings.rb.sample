@@ -1,0 +1,5 @@
+{
+  Cinch::Plugins::Lastfm => {
+    :api_key => '123abc'
+  }
+}
