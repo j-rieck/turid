@@ -14,6 +14,7 @@ module Cinch
       match /deop (\S+) (\S+)/, method: :deop
       match /kick (\S+) (\S+)(.*)?/, method: :kick
       match /conf reload/, method: :conf_reload
+      match /nick (\S+)/, method: :nick
 
       def faggot(m, me)
         m.reply "thoijasdf"
@@ -32,7 +33,7 @@ module Cinch
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         bot.part channel
       end
-      
+
       def say(m, channel, message)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         Channel("##{channel}").privmsg(message)
@@ -49,9 +50,6 @@ module Cinch
       end
 
       def kick(m, channel, user, reason)
-        debug channel
-        debug user
-        debug reason
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         reason ||= "Fuck off!"
         Channel("##{channel}").kick(user, reason)
@@ -60,6 +58,11 @@ module Cinch
       def conf_reload (m)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         $conf = Settings.new("config.json")
+      end
+
+      def nick(m, nick)
+        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        bot.set_nick nick
       end
 
     end
