@@ -8,6 +8,8 @@ module Cinch
     class BotAdm
       include Cinch::Plugin
 
+      timer 300, :method => :fix_nick
+
       match /faggot( .+)?/, method: :faggot
       match /say (\S+) (.*)/, method: :say
       match /op (\S+) (\S+)/, method: :op
@@ -62,7 +64,14 @@ module Cinch
 
       def nick(m, nick)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
-        bot.set_nick nick
+        bot.nick = nick
+        $conf.name = nick
+      end
+
+      def fix_nick
+        unless bot.nick == $conf.name
+          bot.nick = $conf.name
+        end
       end
 
     end
