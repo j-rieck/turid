@@ -15,7 +15,7 @@ module Cinch
           c.plugins.options[Cinch::Plugins::Calculator] = eval( File.open(@@settings_file, "rb").read )
         end
         Wolfram.appid = config[:api_key]
-      end
+			end
 
 			match /c\s(.+)/
       def execute(m, query)
@@ -23,9 +23,9 @@ module Cinch
       	hash =  Wolfram::HashPresenter.new(result).to_hash
 				begin
 	      	m.reply hash[:pods]['Result'][0]
-	      rescue
+				rescue
 	      	m.reply "Computer says no..."
-	      end
+				end
       end
 		end
 	end
