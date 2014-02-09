@@ -11,6 +11,8 @@ module Cinch
       timer 300, :method => :fix_nick
 
       match /faggot( .+)?/, method: :faggot
+      match /join\s+(#[#\w\d_-]+)/, method: :join
+      match /part\s+(#[#\w\d_-]+)/, method: :part
       match /say (\S+) (.*)/, method: :say
       match /op (\S+) (\S+)/, method: :op
       match /deop (\S+) (\S+)/, method: :deop
@@ -24,13 +26,11 @@ module Cinch
         m.reply %-jmiaster er sexy \- #{me}-
       end
 
-      match /join\s+(#[#\w\d_-]+)/, method: :join
       def join(m, channel)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         bot.join channel
       end
 
-      match /part\s+(#[#\w\d_-]+)/, method: :part
       def part(m, channel)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         bot.part channel
