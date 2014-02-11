@@ -10,19 +10,15 @@ module Cinch
 
       match /ol\s?(.+)?/
       def execute(m, c)
-        url = "http://olympics.clearlytech.com/api/v1/medals"
+        url = "http://mapi.sochi2014.com/v1/en/olympic/medal/rating"
         data = JSON.parse(open(url).read)
 
         if c.nil?
           c = "Norway"
         end
-
-        country = data.select {|d| d["country_name"] == c}[0]
-        gold = country["gold_count"]
-        silver = country["silver_count"]
-        bronze = country["bronze_count"]
-
-        m.reply "Medaljer i Sotsji (#{c}): #{gold} gull, #{silver} sølv og #{bronze} bronse"
+        # debug data.to_s 
+        country = data.select {|d| d["name"].match(/#{c}/i)}[0]#debug d.to_s}# )[0]} #d["name"] == c
+        m.reply "Medaljer i Sotsji (#{country["name"]}): #{country["gold"]} gull, #{country["silver"]} sølv og #{country["bronze"]} bronse"
       end
     end
   end

@@ -65,12 +65,12 @@ module Cinch
       def nick(m, nick)
         return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
         bot.nick = nick
-        $conf.name = nick
+        $conf.nick = nick
       end
 
       def fix_nick
-        unless bot.nick == $conf.name
-          bot.nick = $conf.name
+        unless bot.nick == $conf.nick
+          bot.nick = $conf.nick
         end
       end
 
