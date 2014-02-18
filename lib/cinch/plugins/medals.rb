@@ -18,7 +18,12 @@ module Cinch
         data = JSON.parse(open(url).read)[0]
 
         # debug data.to_s
-        m.reply "Medaljer i Sotsji (#{data["c"]}): #{data["g"]} gull, #{data["s"]} sølv og #{data["b"]} bronse"
+
+        if (data["t"] == 0)
+          m.reply "Medaljer i Sotsji: #{data["c"]} har ingen medaler"
+        else
+          m.reply "Medaljer i Sotsji (#{data["c"]}): #{data["g"]} gull, #{data["s"]} sølv og #{data["b"]} bronse"
+        end
       end
     end
   end
