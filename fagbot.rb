@@ -9,16 +9,6 @@ Dir["./lib/cinch/plugins/*.rb"].each {|file| require file }
 
 $conf = Settings.new("config.json")
 
-class TheTime
-  include Cinch::Plugin
-
-  match /thetime/
-
-  def execute(m)
-    m.reply "#{m.user.nick}: Looks like it's fuck-this-shit o'clock"
-  end
-end
-
 bot = Cinch::Bot.new do
   configure do |c|
     c.nick              = $conf.nick
@@ -27,7 +17,7 @@ bot = Cinch::Bot.new do
     c.server            = $conf.server
     c.channels          = $conf.channels
     c.plugins.plugins   = [
-        TheTime,
+        Cinch::Plugins::TheTime,
         Cinch::Plugins::Spotify,
         Cinch::Plugins::DownForEveryone,
         Cinch::Plugins::LastSeen,
@@ -38,10 +28,11 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Xkcd,
         Cinch::Plugins::Ask,
         Cinch::Plugins::Yr,
+        Cinch::Plugins::Lastfm,
         Cinch::Plugins::BotAdm
     ]
 
-    c.plugins.prefix    = /^\./
+    c.plugins.prefix = /^\./
   end
 end
 

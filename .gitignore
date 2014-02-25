@@ -15,9 +15,15 @@
 log/
 target/
 
-# Other
+# Fagbot / Other
 out/
 config.json
+*.settings.rb
 
 # Ruby
 Gemfile.lock
+.bundle
+
+# Vagrant
+.vagrant
+
