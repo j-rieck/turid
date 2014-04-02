@@ -71,7 +71,7 @@ module Cinch
 				get_places
 
 				if loc.nil?
-					m.reply "Bruk: .yr <sted> [<kommune> og eller <fylke>]"
+					m.reply "Bruk: .yr <sted> [<kommune> og/eller <fylke>]"
 					return
 				end
 
