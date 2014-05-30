@@ -25,7 +25,7 @@ module Cinch
 
         title = ""
         response.children.each do |c|
-          title = title + c.text
+          title = title + c.text.strip
         end
 
         url       = /q=([^&]+)/.match(response.attributes['href'].value)[1]
