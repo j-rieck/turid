@@ -35,5 +35,5 @@ bot = Cinch::Bot.new do
     c.plugins.prefix = /^\./
   end
 end
-
+# 8=D
 bot.start
