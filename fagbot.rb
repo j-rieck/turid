@@ -29,6 +29,7 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Ask,
         Cinch::Plugins::Yr,
         Cinch::Plugins::Lastfm,
+        Cinch::Plugins::Markov,
         Cinch::Plugins::BotAdm
     ]
 
