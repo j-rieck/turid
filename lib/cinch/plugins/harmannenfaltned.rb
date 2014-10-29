@@ -10,7 +10,7 @@ module Cinch
 		  def execute(m)
 		  	url = "http://www.vondess.com/mannen/api"
 		  	data = JSON.parse(open(url).read)
-		  	debug data.map{|k,v| "#{k}=#{v}"}.join('&')
+
 		  	if data["falt_ned"] == false
 		  		m.reply "Nei, Mannen har ikke falt ned enda"
 		  	else
