@@ -5,9 +5,10 @@ module Cinch
 		class Harmannenfaltned
 		  include Cinch::Plugin
 
-		  match /^har mannen falt ned\??/i, use_prefix: false
+		  match /har mannen falt ned/i, method: :mannen, use_prefix: false
+		  match /har dovre falt/i, method: :dovre, use_prefix: false
 
-		  def execute(m)
+		  def mannen(m)
 		  	url = "http://www.vondess.com/mannen/api"
 		  	data = JSON.parse(open(url).read)
 
@@ -15,6 +16,17 @@ module Cinch
 		  		m.reply "Nei, Mannen har ikke falt ned enda"
 		  	else
 		  		m.reply "Jepp! Sjekk VG!"
+		  	end
+		  end
+
+		  def dovre(m)
+		  	url = "http://www.vondess.com/dovre/api"
+		  	data = JSON.parse(open(url).read)
+
+		  	if data["falt_ned"] == false
+		  		m.reply "Nei, Dovre har ikke falt enda"
+		  	else
+		  		m.reply "Jepp! Ring VG!"
 		  	end
 		  end
 		end
