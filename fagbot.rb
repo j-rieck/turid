@@ -4,10 +4,12 @@ require 'cinch/plugins/downforeveryone'
 require 'cinch/plugins/last_seen'
 
 require './utils/settings'
+require './utils/db_manager'
 
-Dir["./lib/cinch/plugins/*.rb"].each {|file| require file }
+Dir['./lib/cinch/plugins/*.rb'].each {|file| require file }
 
-$conf = Settings.new("config.json")
+$conf = Settings.new('config.json')
+$db = DBManager.new('./lib/data/bot.db')
 
 bot = Cinch::Bot.new do
   configure do |c|

@@ -7,6 +7,7 @@ module Cinch
       match(/plugin unload (\S+)/, method: :unload_plugin)
       match(/plugin reload (\S+)(?: (\S+))?/, method: :reload_plugin)
       match(/plugin set (\S+) (\S+) (.+)$/, method: :set_option)
+
       def load_plugin(m, plugin, mapping)
         mapping ||= plugin.gsub(/(.)([A-Z])/) { |_|
           $1 + "_" + $2
