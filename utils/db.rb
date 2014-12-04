@@ -8,26 +8,14 @@ class Db
 		@db = SQLite3::Database.new(database)
 	end
 
-	def test(*values, plugin: caller[0][/\/(\w+)\.rb/, 1])
-		return 'test ' + plugin
-	end
-
 	def put(key, value, *values, plugin: caller[0][/\/(\w+)\.rb/, 1])
-		@db.execute "CREATE TABLE IF NOT EXISTS #{plugin}(
-						id INTEGER PRIMARY KEY,
-						key TEXT,
-						value TEXT)"
-
-		@db.execute "INSERT OR REPLACE INTO #{plugin}(key, value) values ('#{key}', '#{value}')"
+		@db.query "CREATE TABLE IF NOT EXISTS #{plugin}(id INTEGER PRIMARY KEY, key TEXT, value TEXT)"
+		@db.query "INSERT OR REPLACE INTO #{plugin}(key, value) values (?, ?)", key, value
 	end
 
 	def get(key, *values, plugin: caller[0][/\/(\w+)\.rb/, 1])
-		@db.execute "CREATE TABLE IF NOT EXISTS #{plugin}(
-						id INTEGER PRIMARY KEY,
-						key TEXT,
-						value TEXT)"
-
-		value = @db.get_first_value "SELECT value from #{plugin} where key = '#{key}' ORDER BY id DESC"
+		@db.query "CREATE TABLE IF NOT EXISTS #{plugin}(id INTEGER PRIMARY KEY, key TEXT, value TEXT)"
+		value = @db.get_first_value "SELECT value from #{plugin} where key = ? ORDER BY id DESC", key
 		return value
 	end
 end
