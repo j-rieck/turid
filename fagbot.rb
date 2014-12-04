@@ -32,7 +32,8 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Lastfm,
         Cinch::Plugins::Markov,
         Cinch::Plugins::BotAdm,
-        Cinch::Plugins::Location
+        Cinch::Plugins::Location,
+        Cinch::Plugins::Alias
     ]
     c.plugins.prefix = /^\./
     c.shared = {:db => Db::new('fagbase')}
