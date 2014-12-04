@@ -27,7 +27,6 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Gee,
         Cinch::Plugins::PluginManagement,
         Cinch::Plugins::Xkcd,
-        Cinch::Plugins::Ask,
         Cinch::Plugins::Yr,
         Cinch::Plugins::Lastfm,
         Cinch::Plugins::Markov,
