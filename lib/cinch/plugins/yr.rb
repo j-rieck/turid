@@ -71,8 +71,13 @@ module Cinch
 				get_places
 
 				if loc.nil?
-					m.reply "Bruk: .yr <sted> [<kommune> og/eller <fylke>]"
-					return
+					db = shared[:db]
+					loc = db.get(m.user.nick, plugin: "location")
+					debug "lokasjon: #{loc}"
+					if loc.nil?
+						m.reply "Bruk: .yr <sted> [<kommune> og/eller <fylke>] eller lagre lokasjon med '.location set <lokasjon>'"
+						return
+					end
 				end
 
 				uri = find loc, reg1, reg2
