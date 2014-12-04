@@ -32,7 +32,7 @@ module Cinch
         if (request['recenttracks'].nil?)
           return "No Lastfm records found on #{username}"
         end
-        
+
         song             = request['recenttracks']['track'][0]['name']
         artist           = request['recenttracks']['track'][0]['artist']['#text']
 
@@ -53,8 +53,18 @@ module Cinch
           debug "No API key specified for plugin. Check conf_last.fm in data folder."
           return
         end
+
+        db = shared[:db]
+        user ||= db.get(m.user.nick)
         user ||= m.user.name
         m.reply handle_recent_tracks (user)
+      end
+
+      match /lastfm setuser (\S+)/, method: :setuser
+      def setuser(m, username)
+        db = shared[:db]
+        db.put(m.user.nick, username)
+        m.reply "Lagret brukernavn #{username} på nick #{m.user.nick}"
       end
     end
   end

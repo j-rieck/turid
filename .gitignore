@@ -27,3 +27,5 @@ Gemfile.lock
 # Vagrant
 .vagrant
 
+#dabases
+db/*.sqlite

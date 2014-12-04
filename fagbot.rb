@@ -4,6 +4,7 @@ require 'cinch/plugins/downforeveryone'
 require 'cinch/plugins/last_seen'
 
 require './utils/settings'
+require './utils/db'
 
 Dir["./lib/cinch/plugins/*.rb"].each {|file| require file }
 
@@ -32,9 +33,8 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Markov,
         Cinch::Plugins::BotAdm
     ]
-
     c.plugins.prefix = /^\./
+    c.shared = {:db => Db::new('fagbase')}
   end
 end
-# 8=D
 bot.start
