@@ -8,6 +8,9 @@ module Cinch
     class BotAdm
       include Cinch::Plugin
 
+      set plugin_name: "BotAdm",
+          help: "If you have to ask how to use it, you're probably not allowed"
+
       timer 300, :method => :fix_nick
 
       match /faggot( .+)?/, method: :faggot

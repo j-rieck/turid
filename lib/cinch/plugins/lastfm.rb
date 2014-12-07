@@ -13,6 +13,9 @@ module Cinch
     class Lastfm
       include Cinch::Plugin
 
+      set plugin_name: "Lastfm",
+          help: %-Last.fm plugin. Show what you are currently playing. Store your username ".lastfm setuser <username>". Show what your playing with the command .np or see what others are playing with ".np <username>"-
+
       @@settings_file = Dir.pwd + '/lib/data/lastfm.settings.rb'
       @@host          = 'ws.audioscrobbler.com'
       @@port          = '80'

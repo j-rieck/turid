@@ -11,6 +11,9 @@ module Cinch
     class Gee
       include Cinch::Plugin
 
+      set plugin_name: "Gee",
+          help: "Google plugin: Use .g <your query here> to ask the allknowing Google about stuff"
+
       match /g (.+)/
 
       def get_url_info (q)

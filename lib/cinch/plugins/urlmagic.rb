@@ -7,6 +7,8 @@ module Cinch
 		class Urlmagic
 			include Cinch::Plugin
 
+			set plugin_name: "Urlmagic"
+
 			match /(https?:\/\/[^\s]+)/, use_prefix: false
 
 			def execute(m, url)
@@ -30,7 +32,7 @@ module Cinch
 					shortURL = bitly.shorten(url)
 					shortURL = "(" + shortURL.short_url + ")"
 				end
-				
+
 				unless title.nil?
 					m.reply %-"#{title}" #{shortURL}-
 				end

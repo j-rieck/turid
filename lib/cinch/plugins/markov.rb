@@ -6,6 +6,8 @@ module Cinch
 		class Markov
 		  include Cinch::Plugin
 
+		  set plugin_name: "Markov"
+
 		  listen_to :channel, method: :execute
 		  timer 60, method: :save_dict
 

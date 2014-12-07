@@ -9,6 +9,9 @@ module Cinch
 			include Cinch::Plugin
 			@@places = Array.new
 
+			set plugin_name: "Yr",
+				help: "Bruk: .yr <sted> [<kommune> og/eller <fylke>], eller lagre lokasjon med '.location set <lokasjon>'"
+
 			match /yr\s?(\p{Word}+)?\s?(\p{Word}+)?\s?(\p{Word}+)?/
 
 			def get_places

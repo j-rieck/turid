@@ -19,6 +19,7 @@ target/
 out/
 config.json
 *.settings.rb
+markov_dictionary.mmd
 
 # Ruby
 Gemfile.lock

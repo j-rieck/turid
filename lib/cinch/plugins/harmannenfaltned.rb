@@ -5,6 +5,9 @@ module Cinch
 		class Harmannenfaltned
 		  include Cinch::Plugin
 
+		  set plugin_name: "Harmannenfaltned",
+		  		help: %-Neat feature to check if the famous Mannen mountain has fallen down. Simply ask the bot "har mannen falt ned?" and you shall know. Now also with a check if Dovre has fallen.-
+
 		  match /har mannen falt ned/i, method: :mannen, use_prefix: false
 		  match /har dovre falt/i, method: :dovre, use_prefix: false
 

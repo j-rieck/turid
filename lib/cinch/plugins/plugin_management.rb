@@ -3,10 +3,14 @@ module Cinch
     class PluginManagement
       include Cinch::Plugin
 
+      set plugin_name: "PluginManagement"
+
       match(/plugin load (\S+)(?: (\S+))?/, method: :load_plugin)
       match(/plugin unload (\S+)/, method: :unload_plugin)
       match(/plugin reload (\S+)(?: (\S+))?/, method: :reload_plugin)
       match(/plugin set (\S+) (\S+) (.+)$/, method: :set_option)
+      match(/plugin reloadall/, method: :reload_all)
+
       def load_plugin(m, plugin, mapping)
         mapping ||= plugin.gsub(/(.)([A-Z])/) { |_|
           $1 + "_" + $2
@@ -75,6 +79,21 @@ module Cinch
       def reload_plugin(m, plugin, mapping)
         unload_plugin(m, plugin)
         load_plugin(m, plugin, mapping)
+      end
+
+      def reload_all(m)
+        @bot.plugins.each { |p|
+          plugin = p.class.plugin_name.capitalize
+
+          begin
+            ok = Cinch::Plugins.const_get(plugin)
+          rescue NameError
+            next
+          end
+
+          unload_plugin(m, plugin)
+          load_plugin(m, plugin, nil)
+        };
       end
 
       def set_option(m, plugin, option, value)

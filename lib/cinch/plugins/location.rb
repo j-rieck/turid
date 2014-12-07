@@ -5,6 +5,9 @@ module Cinch
 		class Location
 			include Cinch::Plugin
 
+			set plugin_name: "Location",
+				help: %-Set location with ".location set <location>", get location with ".location [<username>]" where the username is optional.-
+
 			match /location(?!\s*set)(\w+)?/, method: :get
 			def get(m, nick)
 				nick ||= m.user.nick

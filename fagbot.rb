@@ -18,7 +18,7 @@ bot = Cinch::Bot.new do
     c.server            = $conf.server
     c.channels          = $conf.channels
     c.plugins.plugins   = [
-        Cinch::Plugins::TheTime,
+        Cinch::Plugins::Thetime,
         Cinch::Plugins::Spotify,
         Cinch::Plugins::DownForEveryone,
         Cinch::Plugins::LastSeen,
@@ -32,7 +32,8 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Markov,
         Cinch::Plugins::BotAdm,
         Cinch::Plugins::Location,
-        Cinch::Plugins::Alias
+        Cinch::Plugins::Alias,
+        Cinch::Plugins::Help
     ]
     c.plugins.prefix = /^\./
     c.shared = {:db => Db::new('fagbase')}
