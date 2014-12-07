@@ -29,7 +29,7 @@ module Cinch
 		        @bot.plugins.each { |p|
 		        	list << p.class.plugin_name
 		        };
-		        m.user.privmsg("All #{list.size} currently loaded plugins for #{@bot.nick}:\n#{list.to_sentence}.\nTo view help for a plugin, use `/msg #{@bot.nick} .help <plugin name>`.")
+		        m.user.privmsg("All #{list.size} currently loaded commands for #{@bot.nick}:\n#{list.join(", ")}.\nTo view help for a command, use `/msg #{@bot.nick} .help <command name>`.")
 			end
 		end
 	end
