@@ -36,7 +36,7 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Help
     ]
     c.plugins.prefix = /^\./
-    c.shared = {:db => Db::new('fagbase')}
+    c.shared = {:db => Db::new('turid')}
   end
 end
 bot.start
