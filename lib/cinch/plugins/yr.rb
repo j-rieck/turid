@@ -1,6 +1,7 @@
 # encoding=utf-8
 require 'nokogiri'
 require 'open-uri'
+require 'htmlentities'
 require 'uri'
 
 module Cinch
@@ -44,7 +45,8 @@ module Cinch
 
 				if name.nil?
 					begin
-						name = open(URI.encode("http://easygeo.uk/api.php?g=#{latlon}")).string
+						name_encoded = open(URI.encode("http://easygeo.uk/api.php?g=#{latlon}")).string
+						name = HTMLEntities.new.decode name_encoded
 						db.put(latlon, name)
 					rescue OpenURI::HTTPError
 						debug "Name not found for coordinate #{latlon}"
