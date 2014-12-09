@@ -45,7 +45,7 @@ module Cinch
 
 				if name.nil?
 					begin
-						name_encoded = open(URI.encode("http://easygeo.uk/api.php?g=#{latlon}")).string
+						name_encoded = open(URI.encode("http://easygeo.uk/api.php?g=#{latlon}")).string.force_encoding("UTF-8")
 						name = HTMLEntities.new.decode name_encoded
 						db.put(latlon, name)
 					rescue OpenURI::HTTPError
