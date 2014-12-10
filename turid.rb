@@ -34,7 +34,8 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Location,
         Cinch::Plugins::Alias,
         Cinch::Plugins::Help,
-        Cinch::Plugins::Calculator
+        Cinch::Plugins::Calculator,
+        Cinch::Plugins::Sed
     ]
     c.plugins.prefix = /^\./
     c.shared = {:db => Db::new('turid')}
