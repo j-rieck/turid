@@ -14,9 +14,11 @@ module Cinch
 			def get(m, nick)
 				nick ||= m.user.nick
 				db = shared[:db]
-				location = db.get(nick)
-				location ||= "Fant ingen lagret lokasjon på #{nick}. Bruk '.location set <username>' for å lagre lokasjon"
-				m.reply "#{nick} sin lokasjon er #{location}"
+				if location = db.get(nick.strip!)
+				  m.reply "#{nick} sin lokasjon er #{location}"
+				else
+				  m.reply "Fant ingen lagret lokasjon på #{nick}. Bruk '.location set <username>' for å lagre lokasjon"
+				end
 			end
 
 			match /location set (.+)/, method: :set
