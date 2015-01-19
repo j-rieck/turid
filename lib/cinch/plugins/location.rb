@@ -9,7 +9,8 @@ module Cinch
 			set plugin_name: "Location",
 				help: %-Set location with ".location set <location>", get location with ".location [<username>]" where the username is optional.-
 
-			match /location(?!\s*set)([[:word:]]+)?/, method: :get
+			match /location(?!\s*set)(.+)?/, method: :get
+			
 			def get(m, nick)
 				nick ||= m.user.nick
 				db = shared[:db]
@@ -18,7 +19,7 @@ module Cinch
 				m.reply "#{nick} sin lokasjon er #{location}"
 			end
 
-			match /location set ([[:word:]]+)/, method: :set
+			match /location set (.+)/, method: :set
 			def set(m, location)
 				debug location
 				debug location.encoding.to_s
