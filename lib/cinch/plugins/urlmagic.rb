@@ -20,7 +20,7 @@ module Cinch
 				page = agent.get(url)
 				begin
 					title = page.title.gsub(/[\r\n\t]/, '')
-					title = title.strip!
+					title = title.strip
 					title = title.gsub(/\s{2,}/, ' ')
 				rescue
 					title nil
