@@ -8,6 +8,8 @@ module Cinch
     class Medals
       include Cinch::Plugin
 
+      set plugin_name: "Medals"
+
       match /ol\s?(.+)?/
       def execute(m, c)
         if c.nil?

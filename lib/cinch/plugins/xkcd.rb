@@ -6,6 +6,9 @@ module Cinch
 		class Xkcd
 			include Cinch::Plugin
 
+			set plugin_name: "Xkcd",
+				help: "Show the latest xkcd comic or provide the id for a specific one: .xkcd [<id>]"
+
 			match /xkcd\s?(\d+)?/
 
 			def execute(m, id)

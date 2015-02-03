@@ -5,8 +5,11 @@ require 'cinch'
 
 module Cinch
   module Plugins
-    class TheTime
+    class Thetime
       include Cinch::Plugin
+
+      set plugin_name: "Thetime",
+      	help: "Show bot time by using the command .thetime"
 
       match /thetime/
 

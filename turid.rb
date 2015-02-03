@@ -4,7 +4,7 @@ require 'cinch/plugins/downforeveryone'
 require 'cinch/plugins/last_seen'
 
 require './utils/settings'
-require './utils/db_manager'
+require './utils/db'
 
 Dir['./lib/cinch/plugins/*.rb'].each {|file| require file }
 
@@ -19,7 +19,7 @@ bot = Cinch::Bot.new do
     c.server            = $conf.server
     c.channels          = $conf.channels
     c.plugins.plugins   = [
-        Cinch::Plugins::TheTime,
+        Cinch::Plugins::Thetime,
         Cinch::Plugins::Spotify,
         Cinch::Plugins::DownForEveryone,
         Cinch::Plugins::LastSeen,
@@ -28,15 +28,18 @@ bot = Cinch::Bot.new do
         Cinch::Plugins::Gee,
         Cinch::Plugins::PluginManagement,
         Cinch::Plugins::Xkcd,
-        Cinch::Plugins::Ask,
         Cinch::Plugins::Yr,
         Cinch::Plugins::Lastfm,
         Cinch::Plugins::Markov,
-        Cinch::Plugins::BotAdm
+        Cinch::Plugins::BotAdm,
+        Cinch::Plugins::Location,
+        Cinch::Plugins::Alias,
+        Cinch::Plugins::Help,
+        Cinch::Plugins::Calculator,
+        Cinch::Plugins::Sed
     ]
-
     c.plugins.prefix = /^\./
+    c.shared = {:db => Db::new('turid')}
   end
 end
-# 8=D
 bot.start

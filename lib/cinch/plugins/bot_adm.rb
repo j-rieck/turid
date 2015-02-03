@@ -8,6 +8,9 @@ module Cinch
     class BotAdm
       include Cinch::Plugin
 
+      set plugin_name: "BotAdm",
+          help: "If you have to ask how to use it, you're probably not allowed"
+
       timer 300, :method => :fix_nick
 
       match /faggot( .+)?/, method: :faggot
@@ -20,50 +23,56 @@ module Cinch
       match /conf reload/, method: :conf_reload
       match /nick (\S+)/, method: :nick
 
+      def authorized?(m)
+        unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+          m.reply "Unauthorized access. This incident will be reported"
+          throw "RoflException"
+        end
+      end
+
       def faggot(m, me)
-        m.reply "thoijasdf"
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         m.reply %-jmiaster er sexy \- #{me}-
       end
 
       def join(m, channel)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         bot.join channel
       end
 
       def part(m, channel)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         bot.part channel
       end
 
       def say(m, channel, message)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         Channel("##{channel}").privmsg(message)
       end
 
       def op(m, channel, user)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         Channel("##{channel}").op(user)
       end
 
       def deop(m, channel, user)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         Channel("##{channel}").deop(user)
       end
 
       def kick(m, channel, user, reason)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         reason ||= "Fuck off!"
         Channel("##{channel}").kick(user, reason)
       end
 
       def conf_reload (m)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         $conf = Settings.new("config.json")
       end
 
       def nick(m, nick)
-        return unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+        authorized? m
         bot.nick = nick
         $conf.nick = nick
       end
@@ -73,7 +82,6 @@ module Cinch
           bot.nick = $conf.nick
         end
       end
-
     end
   end
 end

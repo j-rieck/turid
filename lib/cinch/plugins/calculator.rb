@@ -6,6 +6,9 @@ module Cinch
 		class Calculator
 			include Cinch::Plugin
 
+			set plugin_name: "Calculator",
+				help: %-The calculator that knows it all. Use ".c <query>" to calculate just about anything-
+
 			@@settings_file = Dir.pwd + '/lib/data/calculator.settings.rb'
 
 			def initialize(*args)

@@ -13,6 +13,9 @@ module Cinch
     class Lastfm
       include Cinch::Plugin
 
+      set plugin_name: "Lastfm",
+          help: %-Last.fm plugin. Show what you are currently playing. Store your username ".lastfm setuser <username>". Show what your playing with the command .np or see what others are playing with ".np <username>"-
+
       @@settings_file = Dir.pwd + '/lib/data/lastfm.settings.rb'
       @@host          = 'ws.audioscrobbler.com'
       @@port          = '80'
@@ -32,7 +35,7 @@ module Cinch
         if (request['recenttracks'].nil?)
           return "No Lastfm records found on #{username}"
         end
-        
+
         song             = request['recenttracks']['track'][0]['name']
         artist           = request['recenttracks']['track'][0]['artist']['#text']
 
@@ -53,8 +56,18 @@ module Cinch
           debug "No API key specified for plugin. Check conf_last.fm in data folder."
           return
         end
+
+        db = shared[:db]
+        user ||= db.get(m.user.nick)
         user ||= m.user.name
         m.reply handle_recent_tracks (user)
+      end
+
+      match /lastfm setuser (\S+)/, method: :setuser
+      def setuser(m, username)
+        db = shared[:db]
+        db.put(m.user.nick, username)
+        m.reply "Lagret brukernavn #{username} på nick #{m.user.nick}"
       end
     end
   end

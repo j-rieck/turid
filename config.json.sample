@@ -1,10 +1,9 @@
 {
     "server":"efnet.xs4all.nl",
     "port":"6667",
-    "nick":"faggot",
-    "name":"a fag",
-    "user":"faggy",
-    "salt":"hiIAmSalty",
+    "nick":"turid_the_bot",
+    "name":"a bot",
+    "user":"turid",
     "admins":[
         {
             "nick":"tmn",
