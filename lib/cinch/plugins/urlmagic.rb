@@ -33,6 +33,10 @@ module Cinch
 					shortURL = "(" + shortURL.short_url + ")"
 				end
 
+				page = nil
+				agent = nil
+				GC.start
+
 				unless title.nil?
 					m.reply %-"#{title}" #{shortURL}-
 				end
