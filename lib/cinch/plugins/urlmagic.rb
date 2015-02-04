@@ -1,6 +1,6 @@
 require 'cinch'
-require 'mechanize'
 require 'bitly'
+require 'open-uri'
 
 module Cinch
 	module Plugins
@@ -16,28 +16,30 @@ module Cinch
 					return
 				end
 
-				agent = Mechanize.new
-				page = agent.get(url)
-				begin
-					title = page.title.gsub(/[\r\n\t]/, '')
-					title = title.strip
-					title = title.gsub(/\s{2,}/, ' ')
-				rescue
-					title nil
-					debug "could not get title"
-				end
-				shortURL = ""
+				title = nil
+				shortURL = nil
 
-				if url.length > 80
-					Bitly.use_api_version_3
-					bitly = Bitly.new('o_7ao1emfe9u', 'R_b29e38be56eb1f04b9d8d491a4f5b344')
-					shortURL = bitly.shorten(url)
-					shortURL = "(" + shortURL.short_url + ")"
-				end
+				open(url).find {|line| 
+					title = line.match(/<title>(.*)<\/title>/)
+				}
 
 				unless title.nil?
-					m.reply %-"#{title}" #{shortURL}-
+					title = title[1].gsub(/[\r\n\t]/, '')
+					title = title.strip
+					title = title.gsub(/\s{2,}/, ' ')
+
+					if url.length > 80
+						Bitly.use_api_version_3
+						bitly = Bitly.new('o_7ao1emfe9u', 'R_b29e38be56eb1f04b9d8d491a4f5b344')
+						shortURL = bitly.shorten(url)
+						shortURL = "(" + shortURL.short_url + ")"
+					end
+
+					unless title.nil?
+						m.reply %-"#{title}" #{shortURL}-
+					end
 				end
+
 			end
 		end
 	end
