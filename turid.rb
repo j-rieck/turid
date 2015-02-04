@@ -9,7 +9,6 @@ require './utils/db'
 Dir['./lib/cinch/plugins/*.rb'].each {|file| require file }
 
 $conf = Settings.new('config.json')
-$db = DBManager.new('./lib/data/bot.db')
 
 bot = Cinch::Bot.new do
   configure do |c|
