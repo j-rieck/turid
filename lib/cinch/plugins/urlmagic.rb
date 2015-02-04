@@ -35,9 +35,7 @@ module Cinch
 						shortURL = "(" + shortURL.short_url + ")"
 					end
 
-					unless title.nil?
-						m.reply %-"#{title}" #{shortURL}-
-					end
+					m.reply %-"#{title}" #{shortURL}-
 				end
 
 			end
