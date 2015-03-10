@@ -21,7 +21,7 @@ module Cinch
 				end
 
 				msg = find_last_message(m.user.nick)
-				res = msg[2].gsub(/#{Regexp.escape(find)}/, replace)
+				res = msg[2].gsub(/#{find}/, replace)
 				time = Time.at(msg[0].to_i).strftime("%H:%M")
 				m.reply "#{time} <#{msg[1]}> #{res}"
 			end
