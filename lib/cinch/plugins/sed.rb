@@ -16,6 +16,10 @@ module Cinch
 			end
 
 			def replace(m, find, replace, flag)
+				unless m.params[1].start_with? "s"
+					return
+				end
+
 				msg = find_last_message(m.user.nick)
 				res = msg[2].gsub(/#{Regexp.escape(find)}/, replace)
 				time = Time.at(msg[0].to_i).strftime("%H:%M")
