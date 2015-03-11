@@ -21,7 +21,18 @@ module Cinch
 				end
 
 				msg = find_last_message(m.user.nick)
-				res = msg[2].gsub(/#{find}/, replace)
+
+				unless msg[2].match(/#{find}/)
+					m.reply "Intet at korrigere"
+					return
+				end
+
+				if flag == "g"
+					res = msg[2].gsub(/#{find}/, replace)
+				else
+					res = msg[2].sub(/#{find}/, replace)
+				end
+
 				time = Time.at(msg[0].to_i).strftime("%H:%M")
 				m.reply "#{time} <#{msg[1]}> #{res}"
 			end
