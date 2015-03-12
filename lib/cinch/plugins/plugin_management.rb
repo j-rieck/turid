@@ -11,7 +11,16 @@ module Cinch
       match(/plugin set (\S+) (\S+) (.+)$/, method: :set_option)
       match(/plugin reloadall/, method: :reload_all)
 
+      def authorized?(m)
+        unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
+          m.reply "Unauthorized access. This incident will be reported"
+          throw "RoflException"
+        end
+      end
+
       def load_plugin(m, plugin, mapping)
+        authorized? m
+
         mapping ||= plugin.gsub(/(.)([A-Z])/) { |_|
           $1 + "_" + $2
         }.downcase # we downcase here to also catch the first letter
@@ -77,11 +86,15 @@ module Cinch
       end
 
       def reload_plugin(m, plugin, mapping)
+        authorized? m
+
         unload_plugin(m, plugin)
         load_plugin(m, plugin, mapping)
       end
 
       def reload_all(m)
+        authorized? m
+
         @bot.plugins.each { |p|
           plugin = p.class.plugin_name.capitalize
 
@@ -97,6 +110,8 @@ module Cinch
       end
 
       def set_option(m, plugin, option, value)
+        authorized? m
+
         begin
           const = Cinch::Plugins.const_get(plugin)
         rescue NameError
