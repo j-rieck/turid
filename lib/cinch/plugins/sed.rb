@@ -5,6 +5,9 @@ module Cinch
 		class Sed
 			include Cinch::Plugin
 
+			set plugin_name: "Sed",
+				help: "Correct your previous message to the channel by typing s/<pattern>/<replacement>/ supports ruby/perl regex patterns and the g flag for global replacement."
+
 			match /s\/([^\/]+)\/([^\/]+)\/(\w)?/, method: :replace, use_prefix: false
 			listen_to :connect, :method => :on_connect
 			listen_to :channel, :method => :on_channel

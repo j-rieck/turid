@@ -17,8 +17,10 @@ module Cinch
 		  end
 
 		  def execute(m)
-		  	if(Regexp.new("^" + Regexp.escape(m.bot.nick + ":" )) =~ m.message)
+		  	if Regexp.new("^" + Regexp.escape(m.bot.nick + ":" )) =~ m.message
 		  		m.reply @markov.generate_n_sentences(1)
+		  	elsif m.message.match /(https?:\/\/[^\s]+)/ # return on urls
+		  		return
 		  	else
 		  		@markov.parse_string(m.message)
 		  	end
