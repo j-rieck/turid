@@ -7,7 +7,8 @@ module Cinch
 		class Urlmagic
 			include Cinch::Plugin
 
-			set plugin_name: "Urlmagic"
+			set plugin_name: "Urlmagic",
+				help: "Automatically fetches titles for URLs and shortens them if they are long"
 
 			match /(https?:\/\/[^\s]+)/, use_prefix: false
 

@@ -11,7 +11,7 @@ module Cinch
 			@@places = Array.new
 
 			set plugin_name: "Yr",
-				help: "Bruk: .yr <sted>, eller lagre lokasjon med '.location set <lokasjon>'"
+				help: "Bruk: .yr <sted>, eller lagre lokasjon med '.location set <lokasjon>'\nData hentet fra api.met.no er lisensiert under CC Navngivelse 3.0 Norge (CC BY 3.0) http://api.yr.no/lisens_data.html"
 
 			match /yr\s?(.+)?/, method: :forecast
 
