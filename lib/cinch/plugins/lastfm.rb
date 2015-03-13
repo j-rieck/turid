@@ -67,7 +67,7 @@ module Cinch
       def setuser(m, username)
         db = shared[:db]
         db.put(m.user.nick, username)
-        m.reply "Lagret brukernavn #{username} på nick #{m.user.nick}"
+        m.reply "Set lastfm username: #{username} for nick #{m.user.nick}"
       end
     end
   end
