@@ -5,6 +5,10 @@ module Cinch
 		class Userinfo
 			include Cinch::Plugin
 
+			set plugin_name: "Userinfo",
+				help: %-Set any info with ".set <key> <info>", get the info of a user with ".get <username>.<key>" like ".set name turid"; ".get turid.name" yields "turid's name: turid".-
+
+
 			match /set ?(\w+) (.+)/, method: :set
 			match /get ?(\w+)\.(\w+)/, method: :get
 

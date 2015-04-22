@@ -3,6 +3,8 @@ module Cinch
     class PluginManagement
       include Cinch::Plugin
 
+      $conf = Settings.new('config.json')
+
       set plugin_name: "PluginManagement"
 
       match(/plugin load (\S+)(?: (\S+))?/, method: :load_plugin)
@@ -12,10 +14,14 @@ module Cinch
       match(/plugin reloadall/, method: :reload_all)
 
       def authorized?(m)
-        unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
-          m.reply "Unauthorized access. This incident will be reported"
-          throw "RoflException"
-        end
+        $conf.admins.each {|admin|
+          if admin["nick"] == m.user.nick && admin["host"] == m.user.host
+            return true
+          end
+        }
+
+        m.reply "Unauthorized access. This incident will be reported"
+        throw "RoflException"
       end
 
       def load_plugin(m, plugin, mapping)

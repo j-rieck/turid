@@ -24,10 +24,14 @@ module Cinch
       match /nick (\S+)/, method: :nick
 
       def authorized?(m)
-        unless $conf.admins.include?({"nick"=>"#{m.user}", "host"=>"#{m.user.host}"})
-          m.reply "Unauthorized access. This incident will be reported"
-          throw "RoflException"
-        end
+        $conf.admins.each {|admin|
+          if admin["nick"] == m.user.nick && admin["host"] == m.user.host
+            return true
+          end
+        }
+
+        m.reply "Unauthorized access. This incident will be reported"
+        throw "RoflException"
       end
 
       def faggot(m, me)
