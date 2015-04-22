@@ -14,6 +14,7 @@ module Cinch
 				help: "Bruk: .yr <sted>, eller lagre lokasjon med '.location set <lokasjon>'\nData hentet fra api.met.no er lisensiert under CC Navngivelse 3.0 Norge (CC BY 3.0) http://api.yr.no/lisens_data.html"
 
 			match /yr\s?(.+)?/, method: :forecast
+			match /w\s?(.+)?/, method: :forecast
 
 			def forecast(m, loc)
 				db = shared[:db]
