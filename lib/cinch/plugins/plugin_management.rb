@@ -56,6 +56,8 @@ module Cinch
       end
 
       def unload_plugin(m, plugin)
+        authorized? m
+
         begin
           plugin_class = Cinch::Plugins.const_get(plugin)
         rescue NameError
