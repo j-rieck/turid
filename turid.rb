@@ -17,26 +17,13 @@ bot = Cinch::Bot.new do
     c.user              = $conf.user
     c.server            = $conf.server
     c.channels          = $conf.channels
-    c.plugins.plugins   = [
-        Cinch::Plugins::Thetime,
-        Cinch::Plugins::Spotify,
-        Cinch::Plugins::DownForEveryone,
-        Cinch::Plugins::LastSeen,
-        Cinch::Plugins::Hello,
-        Cinch::Plugins::Urlmagic,
-        Cinch::Plugins::Gee,
-        Cinch::Plugins::PluginManagement,
-        Cinch::Plugins::Xkcd,
-        Cinch::Plugins::Yr,
-        Cinch::Plugins::Lastfm,
-        Cinch::Plugins::Markov,
-        Cinch::Plugins::BotAdm,
-        Cinch::Plugins::Location,
-        Cinch::Plugins::Alias,
-        Cinch::Plugins::Help,
-        Cinch::Plugins::Calculator,
-        Cinch::Plugins::Sed
-    ]
+
+    $conf.plugins.each do |p|
+        p = 'Cinch::Plugins::' + p
+        plugin = p.split('::').inject(Object) {|o,c| o.const_get c}
+        c.plugins.plugins.push plugin
+    end
+
     c.plugins.prefix = /^\./
     c.shared = {:db => Db::new('turid')}
   end

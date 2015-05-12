@@ -16,5 +16,22 @@
     ],
     "channels":[
         "#fag4lyfe"
+    ],
+    "plugins":[
+        "BotAdm",
+        "PluginManagement",
+        "Help",
+        "Spotify",
+        "DownForEveryone",
+        "LastSeen",
+        "Gee",
+        "Xkcd",
+        "Yr",
+        "Lastfm",
+        "Markov",
+        "Location",
+        "Alias",
+        "Calculator",
+        "Userinfo"
     ]
 }
