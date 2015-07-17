@@ -23,8 +23,8 @@ module Cinch
 					titlewords = downcasetitle.split(" ")
 					downcaseurl = url.downcase.gsub(/[^a-z0-9\s]/i,' ')
 					urlwords = downcaseurl.split(" ")
-          count=0
-          titlewords.each {|word| count += 1 if urlwords.include?(word)}
+        				count = 0
+          				titlewords.each {|word| count += 1 if urlwords.include?(word)}
 				rescue
 					title nil
 					debug "could not get title"
@@ -43,7 +43,7 @@ module Cinch
 				GC.start
 
 				unless title.nil?
-				  m.reply %-"#{title}" #{shortURL}- if count>(urlwords.count/2)
+				  m.reply %-"#{title}" #{shortURL}- if count > (urlwords.count/2)
 				end
 			end
 		end
