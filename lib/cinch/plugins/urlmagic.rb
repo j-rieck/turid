@@ -19,6 +19,12 @@ module Cinch
 					title = page.title.gsub(/[\r\n\t]/, '')
 					title = title.strip
 					title = title.gsub(/\s{2,}/, ' ')
+					downcasetitle = title.downcase.gsub(/[^a-z0-9\s]/i, ' ')
+					titlewords = downcasetitle.split(" ")
+					downcaseurl = url.downcase.gsub(/[^a-z0-9\s]/i,' ')
+					urlwords = downcaseurl.split(" ")
+          count=0
+          titlewords.each {|word| count += 1 if urlwords.include?(word)}
 				rescue
 					title nil
 					debug "could not get title"
@@ -37,7 +43,7 @@ module Cinch
 				GC.start
 
 				unless title.nil?
-					m.reply %-"#{title}" #{shortURL}-
+				  m.reply %-"#{title}" #{shortURL}- if count>(urlwords.count/2)
 				end
 			end
 		end
