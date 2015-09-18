@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'cinch'
+gem 'cinch', '~>2.2.6'
 gem 'cinch-spotify'
 gem 'cinch-downforeveryone'
 gem 'cinch-last_seen'
