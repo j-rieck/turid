@@ -14,8 +14,8 @@ module Cinch
       timer 300, :method => :fix_nick
 
       match /faggot( .+)?/, method: :faggot
-      match /join\s+(#[#\w\d_-]+)/, method: :join
-      match /part\s+(#[#\w\d_-]+)/, method: :part
+      match /join\s+(#[#\w\d_.-]+)/, method: :join
+      match /part\s+(#[#\w\d_.-]+)/, method: :part
       match /say (\S+) (.*)/, method: :say
       match /op (\S+) (\S+)/, method: :op
       match /deop (\S+) (\S+)/, method: :deop
