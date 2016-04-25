@@ -22,6 +22,11 @@ module Cinch
 				unless m.params[1].start_with? "s"
 					return
 				end
+				
+				# ignore urls
+				if m.params[1].match(/http/)
+					return
+				end
 
 				msg = find_last_message(m.user.nick)
 
