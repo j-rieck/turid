@@ -72,7 +72,7 @@ module Cinch
 				doc = Nokogiri::XML(open(URI.encode(uri)))
 				data = doc.css("weather time:first location:first")
 				
-				reply = reply + " " + data.css("forecast")
+				reply = reply + " " + data.css("forecast").content
 				
 				m.reply reply
 			end
