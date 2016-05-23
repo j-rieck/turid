@@ -66,7 +66,15 @@ module Cinch
 				windDirection = data.css("windDirection").attr('name')
 				humidity = data.css("humidity").attr('value')
 
-				m.reply "Værdata for #{name}: #{temp}°C, #{windSpeed} m/s vind retning #{windDirection}, #{humidity}% luftfuktighet"
+				reply = "Værdata for #{name}: #{temp}°C, #{windSpeed} m/s vind retning #{windDirection}, #{humidity}% luftfuktighet."
+				
+				uri = "http://api.met.no/weatherapi/textlocation/1.0/?language=nb;latitude=#{lat};longitude=#{lon}"
+				doc = Nokogiri::XML(open(URI.encode(uri)))
+				data = doc.css("weather time:first location:first")
+				
+				reply = reply + " " + data.css("forecast")
+				
+				m.reply reply
 			end
 		end
 	end
