@@ -31,9 +31,9 @@ module Cinch
 				# Getting latitude and longitute
 				latlon = db.get(loc)
 
-				if latlon.nil?
+				if latlon.nil? || latlon.empty?
 					latlon = open(URI.encode("http://easygeo.uk/api.php?q=#{loc}")).string
-					if latlon =~ /lat\/lon was not set/
+					if latlon =~ /lat\/lon was not set/ || latlon.nil? || latlon.empty?
 						m.reply "Stedet #{loc} ble ikke funnet"
 						return
 					end
@@ -70,10 +70,12 @@ module Cinch
 				
 				uri = "http://api.met.no/weatherapi/textlocation/1.0/?language=nb;latitude=#{lat};longitude=#{lon}"
 				doc = Nokogiri::XML(open(URI.encode(uri)))
-				data = doc.css("weather time:first location:first")
+				text_forecast = doc.css("weather time:first location:first").css("forecast").first
 				
-				reply = reply + " " + data.css("forecast").content
-				
+				unless text_forecast.nil?
+					reply = reply + " " + text_forecast.content
+				end
+
 				m.reply reply
 			end
 		end
