@@ -2,10 +2,10 @@ require 'cinch'
 
 module Cinch
 	module Plugins
-		class EightBall
+		class Eightball
 		  include Cinch::Plugin
 
-		  set plugin_name: "8ball"
+		  set plugin_name: "Eightball"
 
 		  match /^!8ball |\?$/i, use_prefix: false
 
