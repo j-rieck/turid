@@ -68,7 +68,7 @@ module Cinch
 
 				reply = "Værdata for #{name}: #{temp}°C, #{windSpeed} m/s vind retning #{windDirection}, #{humidity}% luftfuktighet."
 				
-				uri = "http://api.met.no/weatherapi/textlocation/1.0/?language=nb;latitude=#{lat};longitude=#{lon}"
+				uri = "https://api.met.no/weatherapi/textlocation/1.0/?language=nb;latitude=#{lat};longitude=#{lon}"
 				doc = Nokogiri::XML(open(URI.encode(uri)))
 				text_forecast = doc.css("weather time:first location:first").css("forecast").first
 				
