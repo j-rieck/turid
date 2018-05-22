@@ -57,6 +57,7 @@ module Cinch
 				lat = latlon.scan(/\d+.\d+/)[0]
 				lon = latlon.scan(/\d+.\d+/)[1]
 				uri = "https://api.met.no/weatherapi/locationforecast/1.9/?lat=#{lat};lon=#{lon}"
+				debug uri
 				doc = Nokogiri::XML(open(URI.encode(uri)))
 				data = doc.css("weatherdata product time:first")
 
