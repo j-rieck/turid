@@ -7,11 +7,11 @@ module Cinch
 
 		  set plugin_name: "Hello"
 
-		  match /^H[ae](i|llo)(en|sann)?$/i, use_prefix: false
+		  match /^H[ae](i|llo|y)(en|sann)?$/i, use_prefix: false
 
 		  def execute(m)
 		  	sleep(1)
-		  	m.reply "Hei #{m.user.nick}!"
+		  	m.reply "Hello #{m.user.nick}!"
 		  end
 		end
 	end

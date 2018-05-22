@@ -15,9 +15,9 @@ module Cinch
 				nick ||= m.user.nick
 				db = shared[:db]
 				if location = db.get(nick.strip!)
-				  m.reply "#{nick} sin lokasjon er #{location}"
+				  m.reply "#{nick}'s location is #{location}"
 				else
-				  m.reply "Fant ingen lagret lokasjon på #{nick}. Bruk '.location set <username>' for å lagre lokasjon"
+				  m.reply "Did not find a location for #{nick}. Use '.location set <username>' to save a"
 				end
 			end
 
@@ -27,7 +27,7 @@ module Cinch
 				debug location.encoding.to_s
 				db = shared[:db]
 				db.put(m.user.nick, location)
-				m.reply "Oppdaterte lokasjonen til #{m.user.nick}"
+				m.reply "Updated #{m.user.nick}'s location"
 			end
 		end
 	end

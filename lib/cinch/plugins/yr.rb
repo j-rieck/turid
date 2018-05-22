@@ -11,7 +11,7 @@ module Cinch
 			@@places = Array.new
 
 			set plugin_name: "Yr",
-				help: "Bruk: .yr <sted>, eller lagre lokasjon med '.location set <lokasjon>'\nData hentet fra api.met.no er lisensiert under CC Navngivelse 3.0 Norge (CC BY 3.0) http://api.yr.no/lisens_data.html"
+				help: "Use: .yr <place>, or save location with '.location set <lokasjon>'\nData is fetched from api.met.no and is licensed under CC Navngivelse 3.0 Norge (CC BY 3.0) http://api.yr.no/lisens_data.html"
 
 			match /yr\s?(.+)?/, method: :forecast
 			match /w\s?(.+)?/, method: :forecast
@@ -23,7 +23,7 @@ module Cinch
 					loc = db.get(m.user.nick, plugin: "location")
 					debug "lokasjon: #{loc}"
 					if loc.nil?
-						m.reply "Bruk: .yr <sted> [<kommune> og/eller <fylke>] eller lagre lokasjon med '.location set <lokasjon>'"
+						m.reply "Use: .yr <place>, or save location with '.location set <lokasjon>'"
 						return
 					end
 				end
@@ -34,7 +34,7 @@ module Cinch
 				if latlon.nil? || latlon.empty?
 					latlon = open(URI.encode("http://easygeo.uk/api.php?q=#{loc}")).string
 					if latlon =~ /lat\/lon was not set/ || latlon.nil? || latlon.empty?
-						m.reply "Stedet #{loc} ble ikke funnet"
+						m.reply "Place #{loc} not found"
 						return
 					end
 
@@ -66,7 +66,7 @@ module Cinch
 				windDirection = data.css("windDirection").attr('name')
 				humidity = data.css("humidity").attr('value')
 
-				reply = "Værdata for #{name}: #{temp}°C, #{windSpeed} m/s vind retning #{windDirection}, #{humidity}% luftfuktighet."
+				reply = "Weather data for #{name}: #{temp}°C, #{windSpeed} m/s wind, direction #{windDirection}, #{humidity}% humidity."
 				
 				uri = "https://api.met.no/weatherapi/textlocation/1.0/?language=nb;latitude=#{lat};longitude=#{lon}"
 				doc = Nokogiri::XML(open(URI.encode(uri)))

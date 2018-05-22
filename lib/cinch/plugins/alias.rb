@@ -12,7 +12,7 @@ module Cinch
 			def create_alias(m, a, message)
 				db = shared[:db]
 				db.put(a, message)
-				m.reply "Lagret aliaset @#{a}"
+				m.reply "Saved alias @#{a}"
 			end
 
 			match /^@(\S+)/, method: :get_alias, use_prefix: false
