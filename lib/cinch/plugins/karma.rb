@@ -40,7 +40,7 @@ module Cinch
 					db.put(nick, new_karma)
 				end
 
-				m.reply "☆☆ #{nick}'s karma is #{new_karma} ☆☆"
+				m.user.privmsg "☆☆ #{nick}'s karma is #{new_karma} ☆☆"
 			end
 
 			def get_karma(m, nick)
