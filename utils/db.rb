@@ -14,7 +14,7 @@ class Db
 	end
 
 	def update(key, value, *values, plugin: caller[0][/\/(\w+)\.rb/, 1])
-		@db.query "UPDATE #{plugin} SET key = ?, value = ?", key, value
+		@db.query "UPDATE #{plugin} SET value = ? where key = ?", value, key
 	end
 
 	def get(key, *values, plugin: caller[0][/\/(\w+)\.rb/, 1])
