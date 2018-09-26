@@ -23,7 +23,7 @@ module Cinch
 		  end
 
 		  def dovre(m)
-		  	url = "http://www.vondess.com/dovre/api"
+		  	url = "https://www.vondess.com/dovre/api"
 		  	data = JSON.parse(open(url).read)
 
 		  	if data["falt_ned"] == false
