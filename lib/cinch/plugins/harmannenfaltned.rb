@@ -12,7 +12,7 @@ module Cinch
 		  match /har dovre falt/i, method: :dovre, use_prefix: false
 
 		  def mannen(m)
-		  	url = "http://www.vondess.com/mannen/api"
+		  	url = "https://www.vondess.com/mannen/api"
 		  	data = JSON.parse(open(url).read)
 
 		  	if data["falt_ned"] == false
