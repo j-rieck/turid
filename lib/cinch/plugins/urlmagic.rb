@@ -43,7 +43,7 @@ module Cinch
 				GC.start
 
 				unless title.nil?
-				  m.reply %-"#{title}" #{shortURL}- if count > (urlwords.count/2)
+				  m.reply %-"#{title}" #{shortURL}- if count < (urlwords.count/2)
 				end
 			end
 		end
