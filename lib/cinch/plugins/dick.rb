@@ -9,7 +9,7 @@ module Cinch
 		  set plugin_name: "Dick",
 		  		help: %-Get a given number of dicks. This plugin may serve up to 5 dicks at at once. Say: "Gi meg n peniser" where n is the number of dicks you require-
 
-		  match /gi meg (\d+) penis/i, use_prefix: false
+		  match /gi meg ([\d.]+) penis/i, use_prefix: false
 			def execute(m, n)
 				reply = ""
 				if n.to_i > 5
