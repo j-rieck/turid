@@ -10,6 +10,7 @@ module Cinch
 
 		  match /har mannen falt ned/i, method: :mannen, use_prefix: false
 		  match /har dovre falt/i, method: :dovre, use_prefix: false
+		  match /har veslemannen falt ned/i method :veslemannen, use_prefix: false
 
 		  def mannen(m)
 		  	url = "https://www.vondess.com/mannen/api"
@@ -32,6 +33,16 @@ module Cinch
 		  		m.reply "Jepp! Ring VG!"
 		  	end
 		  end
+			
+		  def veslemannen(m)
+			  url = "https://www.vondess.com/veslemannen/api"
+			  data = JSON.parse(open(url).read)
+
+		  	  if data["falt_ned"] == false
+		  		m.reply "Nei, veslemannen har ikke falt enda"
+		  	  else
+		  		m.reply "Jepp! Ring VG!"
+		  	  end
 		end
 	end
 end
