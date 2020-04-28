@@ -25,14 +25,9 @@ module Cinch
       	result = Wolfram.fetch(query)
       	hash =  Wolfram::HashPresenter.new(result).to_hash
 				begin
-					for pod in hash[:pods]
-						if pod[:title] == "Results"
-							m. reply pod[:subpods][0][:plaintext]
-						end
-					end
-	      			m.reply 
+	      	m.reply hash[:pods]['Results'][0]
 				rescue
-	      			m.reply "Computer says no..."
+	      	m.reply "Computer says no..."
 				end
       end
 		end
