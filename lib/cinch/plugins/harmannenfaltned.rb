@@ -10,7 +10,7 @@ module Cinch
 
 		  match /har mannen falt ned/i, method: :mannen, use_prefix: false
 		  match /har dovre falt/i, method: :dovre, use_prefix: false
-		  match /har veslemannen falt ned/i method :veslemannen, use_prefix: false
+		  match /har veslemannen falt ned/i, method :veslemannen, use_prefix: false
 
 		  def mannen(m)
 		  	url = "https://www.vondess.com/mannen/api"
